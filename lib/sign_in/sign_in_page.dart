@@ -7,7 +7,7 @@ import 'package:google_sigin/sign_in/social_sign_in_button.dart';
 
 
 class SignInPage extends StatelessWidget {
-  SignInPage(@required this.onSignIn);
+  SignInPage( {@required this.onSignIn});
   final Function(FirebaseUser) onSignIn;
 
   Future<void> _signInAnonymously() async {
