@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sigin/sign_in/sign_in_button.dart';
 import 'package:google_sigin/sign_in/social_sign_in_button.dart';
 
-
+import '../authentication.dart';
 
 class SignInPage extends StatelessWidget {
-  SignInPage( {@required this.onSignIn});
-  final Function(FirebaseUser) onSignIn;
+  SignInPage({@required this.auth});
+  final AuthBase auth;
 
   Future<void> _signInAnonymously() async {
     try {
-      final authResult = await FirebaseAuth.instance.signInAnonymously();
-      onSignIn(authResult.user);
-    }catch(e){
-      print(e.string());
+      await auth.signInAnonymously();
+    } catch (e) {
+      print(e.toString());
     }
   }
 
@@ -23,8 +20,8 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Equinox2021')),
-        elevation: 10.0,
+        title: Text('Equinox 2021'),
+        elevation: 2.0,
       ),
       body: _buildContent(),
       backgroundColor: Colors.grey[200],
@@ -46,13 +43,20 @@ class SignInPage extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          SizedBox(height: 30.0),
+          SizedBox(height: 48.0),
           SocialSignInButton(
             assetName: 'images/google-logo.png',
             text: 'Sign in with Google',
             textColor: Colors.black87,
             color: Colors.white,
             onPressed: () {},
+          ),
+
+          SizedBox(height: 8.0),
+          Text(
+            'or',
+            style: TextStyle(fontSize: 14.0, color: Colors.black87),
+            textAlign: TextAlign.center,
           ),
           SizedBox(height: 8.0),
           SignInButton(
