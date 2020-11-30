@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Equinox2021',
       theme: ThemeData(
-        primarySwatch: Colors.indigo,
+        primarySwatch: Colors.orange,
       ),
       home: LandingPage(
         auth: Auth(),

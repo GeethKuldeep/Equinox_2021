@@ -33,6 +33,20 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-    );
+      body: Row(
+          children: [
+            SizedBox(height: 50),
+            Container(
+              child: Text('Hey participants...you have successfully signed in',textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              color: Colors.lightGreenAccent,
+            ),
+        ],
+
+      ),
+
+      );
   }
 }
