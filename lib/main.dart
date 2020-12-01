@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'authentication.dart';
+import 'services/authentication.dart';
 import 'landing_page.dart';
+import 'package:provider/provider.dart';
 
 
 
@@ -13,14 +15,16 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Equinox2021',
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
-      ),
-      home: LandingPage(
-        auth: Auth(),
+    return Provider<AuthBase>(
+      create: (context)=> Auth(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Equinox2021',
+        theme: ThemeData(
+          primarySwatch: Colors.orange,
+        ),
+        home: LandingPage(
+        ),
       ),
     );
   }

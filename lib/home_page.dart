@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'authentication.dart';
+import 'services/authentication.dart';
 
 
 class HomePage extends StatelessWidget {
-  HomePage({@required this.auth});
-  final AuthBase auth;
 
-  Future<void> _signOut() async {
+
+  Future<void> _signOut(BuildContext context) async {
     try {
+      final auth=Provider.of<AuthBase>(context);
       await auth.signOut();
     } catch (e) {
       print(e.toString());
@@ -29,7 +30,9 @@ class HomePage extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            onPressed: _signOut,
+            onPressed:(){
+              _signOut(context);
+            },
           ),
         ],
       ),
@@ -37,7 +40,7 @@ class HomePage extends StatelessWidget {
           children: [
             SizedBox(height: 50),
             Container(
-              child: Text('Hey participants...you have successfully signed in',textAlign: TextAlign.center,
+              child: Text('Hey participant...you have successfully signed in',textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
