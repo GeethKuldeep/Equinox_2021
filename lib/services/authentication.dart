@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class User {
   User({@required this.uid});
   final String uid;
+
 }
 
 abstract class AuthBase {
@@ -36,11 +38,12 @@ class Auth implements AuthBase {
     final user = await _firebaseAuth.currentUser();
     return _userFromFirebase(user);
   }
+
   @override
   Future<User> signInWithGoogle() async {
     final googleSignIn = GoogleSignIn();
     final googleAccount = await googleSignIn.signIn();
-    if (googleAccount != null) {
+    if (googleAccount.email.contains("@vitstudent.ac.in")) {
       final googleAuth = await googleAccount.authentication;
       if (googleAuth.accessToken != null && googleAuth.idToken != null) {
         final authResult = await _firebaseAuth.signInWithCredential(
@@ -57,10 +60,13 @@ class Auth implements AuthBase {
         );
       }
     } else {
+
       throw PlatformException(
         code: 'ERROR_ABORTED_BY_USER',
-        message: 'Sign in aborted by user',
+        message: 'Use VIT mail to sigin',
+
       );
+
     }
   }
 

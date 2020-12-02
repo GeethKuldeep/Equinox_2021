@@ -44,6 +44,9 @@ class SignInPage extends StatelessWidget {
               color: Colors.white,
               onPressed: () => _signInWithGoogle(context),
             ),
+            if(vit == false){
+              SnackBar
+            }
           ],
         ),
       ),
