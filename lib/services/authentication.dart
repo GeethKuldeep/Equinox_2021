@@ -43,7 +43,7 @@ class Auth implements AuthBase {
   Future<User> signInWithGoogle() async {
     final googleSignIn = GoogleSignIn();
     final googleAccount = await googleSignIn.signIn();
-    if (googleAccount.email.contains("@vitstudent.ac.in")) {
+    if (googleAccount != null) {
       final googleAuth = await googleAccount.authentication;
       if (googleAuth.accessToken != null && googleAuth.idToken != null) {
         final authResult = await _firebaseAuth.signInWithCredential(
