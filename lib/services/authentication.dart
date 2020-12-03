@@ -15,6 +15,8 @@ abstract class AuthBase {
   Future<User> currentUser();
   Future<void> signOut();
   Future<User> signInWithGoogle();
+  Future<User> signInWithEmailAndPassword(String email, String password);
+  Future<User> createUserWithEmailAndPassword(String email, String password);
 }
 
 class Auth implements AuthBase {
@@ -37,6 +39,20 @@ class Auth implements AuthBase {
   Future<User> currentUser() async {
     final user = await _firebaseAuth.currentUser();
     return _userFromFirebase(user);
+  }
+  @override
+  Future<User> signInWithEmailAndPassword(String email, String password) async {
+    final authResult = await _firebaseAuth.signInWithEmailAndPassword(
+        email: email, password: password);
+    return _userFromFirebase(authResult.user);
+  }
+
+  @override
+  Future<User> createUserWithEmailAndPassword(
+      String email, String password) async {
+    final authResult = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password);
+    return _userFromFirebase(authResult.user);
   }
 
   @override
