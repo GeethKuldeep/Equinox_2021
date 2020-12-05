@@ -13,8 +13,9 @@ class User {
 
 abstract class AuthBase {
   Stream<User> get onAuthStateChanged;
-  Future<void> VerifyUser();
+
   Future<User> currentUser();
+  Future<void> checkEmailVerified();
   Future<void> signOut();
   Future<User> signInWithGoogle();
   Future<User> signInWithEmailAndPassword(String email, String password);
@@ -22,6 +23,7 @@ abstract class AuthBase {
 }
 
 class Auth implements AuthBase {
+  bool Verified;
 
   final _firebaseAuth = FirebaseAuth.instance;
 
@@ -55,6 +57,14 @@ class Auth implements AuthBase {
     final authResult = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
     return _userFromFirebase(authResult.user);
+  }
+  @override
+  Future<void> checkEmailVerified()async{
+    final user = await _firebaseAuth.currentUser();
+    await user.reload();
+    if(user.isEmailVerified){
+      Verified =true;
+    }
   }
 
 

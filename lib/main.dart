@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import 'services/authentication.dart';
 import 'landing_page.dart';
-import 'package:provider/provider.dart';
 
 
 

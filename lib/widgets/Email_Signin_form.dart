@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sigin/services/authentication.dart';
 import 'package:provider/provider.dart';
 import 'Email_Signin_Button.dart';
+import 'email_verification.dart';
 
 enum EmailSignInFormType { signIn, register }
 
@@ -45,6 +46,10 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
     }
   }
 
+  void sendingcode(){
+    _submit();
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> Verified()));
+  }
 
   void _emailEditingComplete() {
     FocusScope.of(context).requestFocus(_password1FocusNode);
@@ -145,10 +150,12 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
               FormSubmitButton(
                 text: primaryText,
                 onPressed:(){
-                  if(_formkey.currentState.validate()== true){
-                    return _submit();
-                  }
-
+                    if (_formkey.currentState.validate() == true) {
+                        _submit();
+                      if (_formType == EmailSignInFormType.register) {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> Verified()));
+                      }
+                    }
                 },
               ),
 
