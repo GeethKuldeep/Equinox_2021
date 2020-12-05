@@ -9,8 +9,8 @@ class EmailSigninPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign in Macha'),
-        elevation: 2.0,
+        title: Text('Sign in'),
+        elevation: 10.0,
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),

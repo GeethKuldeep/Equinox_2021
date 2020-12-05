@@ -1,4 +1,9 @@
+
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sigin/services/authentication.dart';
 import 'package:provider/provider.dart';
 import 'Email_Signin_Button.dart';
@@ -12,14 +17,19 @@ class EmailSignInForm extends StatefulWidget {
 
 class _EmailSignInFormState extends State<EmailSignInForm> {
 
+
+
   var _formkey =GlobalKey<FormState>();
+  String confirmpassword = "";
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final FocusNode _emailFocusNode = FocusNode();
-  final FocusNode _passwordFocusNode = FocusNode();
+  final FocusNode _password1FocusNode = FocusNode();
+  final FocusNode _password2FocusNode = FocusNode();
   String get _email => _emailController.text;
   String get _password => _passwordController.text;
   EmailSignInFormType _formType = EmailSignInFormType.signIn;
+
 
   void _submit() async {
     try {
@@ -35,8 +45,12 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
     }
   }
 
+
   void _emailEditingComplete() {
-    FocusScope.of(context).requestFocus(_passwordFocusNode);
+    FocusScope.of(context).requestFocus(_password1FocusNode);
+  }
+  void _passwordEditingComplete(){
+    FocusScope.of(context).requestFocus(_password2FocusNode);
   }
   void _toggleFormType() {
       setState(() {
@@ -51,7 +65,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
     @override
     Widget build(BuildContext context) {
       final primaryText = _formType == EmailSignInFormType.signIn
-          ? 'Sign in'
+          ? 'Login in'
           : 'Create an account';
       final secondaryText = _formType == EmailSignInFormType.signIn
           ? 'Need an account? Register'
@@ -68,7 +82,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                 key: ValueKey("email"),
                 validator: (value){
                   if (value.isEmpty || !value.contains('@vitstudent.ac.in')){
-                    return 'Hey Asshole enter a valid email';
+                    return 'Please enter a valid email';
                   }
                   return null;
                 },
@@ -80,29 +94,53 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                 ),
                 autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
-
                 textInputAction: TextInputAction.next,
                 onEditingComplete: _emailEditingComplete,
               ),
               SizedBox(height: 8.0),
+
               TextFormField(
-                key: ValueKey("password"),
+                key: ValueKey("password1"),
                 validator: (value){
+                  confirmpassword =value;
                   if (value.isEmpty || value.length<7){
                     return 'Password must be at least 7 characters long';
                   }
                   return null;
                 },
-                controller: _passwordController,
-                focusNode: _passwordFocusNode,
                 decoration: InputDecoration(
                   labelText: 'Password',
                 ),
-                textInputAction: TextInputAction.done,
+                controller: _passwordController,
+                focusNode: _password1FocusNode,
+                textInputAction: TextInputAction.next,
+                onEditingComplete: _passwordEditingComplete,
                 obscureText: true,
-
-                onEditingComplete: _submit,
               ),
+
+
+              if(_formType == EmailSignInFormType.register)
+                TextFormField(
+                  key: ValueKey("password2"),
+                  validator: (value){
+                      if (value.isEmpty || value.length < 7) {
+                        return 'Password must be at least 7 characters long';
+                    }
+                      if(confirmpassword != value){
+                        return 'Password not matched please enter again';
+                      }
+                    return null;
+                  },
+                  focusNode: _password2FocusNode,
+                  decoration: InputDecoration(
+                    labelText: 'Confirm your Password',
+                  ),
+                  textInputAction: TextInputAction.done,
+                  obscureText: true,
+                  onEditingComplete: _submit,
+                ),
+
+
               SizedBox(height: 8.0),
               FormSubmitButton(
                 text: primaryText,
@@ -110,8 +148,11 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                   if(_formkey.currentState.validate()== true){
                     return _submit();
                   }
+
                 },
               ),
+
+
               SizedBox(height: 8.0),
               FlatButton(
                 child: Text(secondaryText),

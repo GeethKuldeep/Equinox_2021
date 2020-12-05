@@ -1,12 +1,25 @@
 
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sigin/services/authentication.dart';
 import 'package:google_sigin/home_page.dart';
 import 'package:google_sigin/sign_in/sign_in_page.dart';
+import 'package:google_sigin/widgets/email_verification.dart';
 import 'package:provider/provider.dart';
 
 
-class LandingPage extends StatelessWidget {
+class LandingPage extends StatefulWidget {
+  @override
+  _LandingPageState createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
+
+
+
+
   @override
   Widget build(BuildContext context) {
     final auth=Provider.of<AuthBase>(context);
@@ -18,7 +31,7 @@ class LandingPage extends StatelessWidget {
             if (user == null) {
               return SignInPage();
             }
-            return HomePage();
+            return Verified();
 
           } else {
             return Scaffold(

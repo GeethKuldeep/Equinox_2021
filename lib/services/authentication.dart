@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class User {
   User({@required this.uid});
@@ -12,6 +13,7 @@ class User {
 
 abstract class AuthBase {
   Stream<User> get onAuthStateChanged;
+  Future<void> VerifyUser();
   Future<User> currentUser();
   Future<void> signOut();
   Future<User> signInWithGoogle();
@@ -54,6 +56,8 @@ class Auth implements AuthBase {
         email: email, password: password);
     return _userFromFirebase(authResult.user);
   }
+
+
 
   @override
   Future<User> signInWithGoogle() async {
