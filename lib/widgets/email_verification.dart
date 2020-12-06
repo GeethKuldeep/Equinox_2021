@@ -18,21 +18,27 @@ class _VerifiedState extends State<Verified> {
     user = await auth.currentUser();
   }
 
+  bool verify =false;
 
   @override
   void initState(){
     authCurrentUser();
-    if(user != null ){
-      user.sendEmailVerification();
-      print('email sent');
-    }
+
     timer= Timer.periodic(Duration(seconds: 5), (timer) {
+      if(verify==false  &&  user !=null ){
+        user.sendEmailVerification();
+        print('email sent');
+        verify =true;
+      }
+
       checkEmailVerified();
+
     });
     super.initState();
   }
 
   Future<void> checkEmailVerified()async{
+
     user= await auth.currentUser();
     await user.reload();
     if(user.isEmailVerified){

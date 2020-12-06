@@ -45,11 +45,13 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
           'email': _email,
         });
       }
+
       Navigator.of(context).pop();
     } catch (e) {
       print(e.toString());
     }
   }
+
 
 
   void _UsernameEditingComplete() {

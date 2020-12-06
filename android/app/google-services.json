@@ -1,42 +1,33 @@
 {
   "project_info": {
-    "project_number": "248242175995",
-    "firebase_url": "https://equinox-21b96.firebaseio.com",
-    "project_id": "equinox-21b96",
-    "storage_bucket": "equinox-21b96.appspot.com"
+    "project_number": "584023124839",
+    "project_id": "equinox--2021",
+    "storage_bucket": "equinox--2021.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:248242175995:android:58a41ee4b5dd706c45155e",
+        "mobilesdk_app_id": "1:584023124839:android:b78b6e4703c31031b89dc2",
         "android_client_info": {
           "package_name": "com.example.google_sigin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "248242175995-hsoum2b6l06lne4buuf1dh34vubfptde.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.google_sigin",
-            "certificate_hash": "d7d8c5e79e359f511392a41c3f8483b24739462c"
-          }
-        },
-        {
-          "client_id": "248242175995-69m02f6qja4r0a8tebt1n870a8jci1pu.apps.googleusercontent.com",
+          "client_id": "584023124839-gmp59avauscr9vsai6tn5i6ef2sobtfg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDT_esk9lhM7t5M8PkBJVKGlfWlK1ufAco"
+          "current_key": "AIzaSyDsTo3T6o79eeiiagyXyS3P-o-MbyJT-gg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "248242175995-69m02f6qja4r0a8tebt1n870a8jci1pu.apps.googleusercontent.com",
+              "client_id": "584023124839-gmp59avauscr9vsai6tn5i6ef2sobtfg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
