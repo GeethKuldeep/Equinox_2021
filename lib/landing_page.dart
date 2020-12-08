@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sigin/home_page.dart';
 import 'package:google_sigin/services/authentication.dart';
+import 'package:google_sigin/sign_in/email_sigin_page.dart';
 import 'package:google_sigin/sign_in/sign_in_page.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +28,7 @@ class _LandingPageState extends State<LandingPage> {
           if (snapshot.connectionState == ConnectionState.active) {
             User user = snapshot.data;
             if (user == null) {
-              return SignInPage();
+              return EmailSigninPage();
             }
             return HomePage();
           }

@@ -37,13 +37,15 @@ class _VerifiedState extends State<Verified> {
     super.initState();
   }
 
+
   Future<void> checkEmailVerified()async{
 
     user= await auth.currentUser();
     await user.reload();
-    if(user.isEmailVerified){
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> HomePage()));
+    if(user.isEmailVerified && user != null){
       print('EMAIL VERIFIED');
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> HomePage()));
+
     }
   }
 
@@ -62,6 +64,7 @@ class _VerifiedState extends State<Verified> {
               Center(child: Text('Waiting for your email to be verified ')),
               SizedBox(height: 15),
               Center(child: CircularProgressIndicator()),
+
             ],
           ),
         ),

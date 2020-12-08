@@ -46,7 +46,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
         });
       }
 
-      Navigator.of(context).pop();
+      //Navigator.of(context).pop();
     } catch (e) {
       print(e.toString());
     }
@@ -181,7 +181,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                     if (_formkey.currentState.validate() == true) {
                         _submit();
                       if (_formType == EmailSignInFormType.register) {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> Verified()));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Verified()));
                       }
                     }
                 },
