@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_sigin/sign_in/email_sigin_page.dart';
 import 'package:provider/provider.dart';
 
 import 'services/authentication.dart';
@@ -11,6 +12,7 @@ class HomePage extends StatelessWidget {
     try {
       final auth=Provider.of<AuthBase>(context);
       await auth.signOut();
+      print('logged out successfully 123');
     } catch (e) {
       print(e.toString());
     }
@@ -20,6 +22,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('Home Page'),
         actions: <Widget>[
           FlatButton(
@@ -32,6 +35,9 @@ class HomePage extends StatelessWidget {
             ),
             onPressed:(){
               _signOut(context);
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> EmailSigninPage()));
+
+              print('logged out successfully');
             },
           ),
         ],

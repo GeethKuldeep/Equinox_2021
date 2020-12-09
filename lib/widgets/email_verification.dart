@@ -53,9 +53,6 @@ class _VerifiedState extends State<Verified> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Please check your email'),
-      ),
       body: Card(
         child: Center(
           child: Column(

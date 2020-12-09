@@ -31,6 +31,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   String get _password => _passwordController.text;
   EmailSignInFormType _formType = EmailSignInFormType.signIn;
   User authResult;
+  var color1 = const Color(0xffFBD00D);
 
 
   void _submit() async {
@@ -78,105 +79,171 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
     @override
     Widget build(BuildContext context) {
       final primaryText = _formType == EmailSignInFormType.signIn
-          ? 'Login in'
+          ? 'SIGN IN'
           : 'Create an account';
       final secondaryText = _formType == EmailSignInFormType.signIn
           ? 'Need an account? Register'
           : 'Have an account? Sign in';
-      return Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
+      return Form(
           key: _formkey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
               if(_formType == EmailSignInFormType.register)
-              TextFormField(
-                key: ValueKey("UseName"),
-                validator: (value){
-                  if (value.isEmpty){
-                    return 'Enter your Name';
-                  }
-                  return null;
-                },
-                controller: _UsernameController,
-                focusNode: _UsernameFocusNode,
-                decoration: InputDecoration(
-                  labelText: 'Enter your Name',
-                ),
-                autocorrect: false,
-                keyboardType: TextInputType.name,
-                textInputAction: TextInputAction.next,
-                onEditingComplete: _UsernameEditingComplete,
-              ),
-              SizedBox(height: 8.0),
-              TextFormField(
-                key: ValueKey("email"),
-                validator: (value){
-                  if (value.isEmpty || !value.contains('@vitstudent.ac.in')){
-                    return 'Please enter a valid email';
-                  }
-                  return null;
-                },
-                controller: _emailController,
-                focusNode: _emailFocusNode,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  hintText: 'xxxxx@vitstudent.ac.in',
-                ),
-                autocorrect: false,
-                keyboardType: TextInputType.emailAddress,
-                textInputAction: TextInputAction.next,
-                onEditingComplete: _emailEditingComplete,
-              ),
-              SizedBox(height: 8.0),
-
-              TextFormField(
-                key: ValueKey("password1"),
-                validator: (value){
-                  confirmpassword =value;
-                  if (value.isEmpty || value.length<7){
-                    return 'Password must be at least 7 characters long';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                ),
-                controller: _passwordController,
-                focusNode: _password1FocusNode,
-                textInputAction: TextInputAction.next,
-                onEditingComplete: _passwordEditingComplete,
-                obscureText: true,
-              ),
-
-
-              if(_formType == EmailSignInFormType.register)
                 TextFormField(
-                  key: ValueKey("password2"),
-                  validator: (value){
-                      if (value.isEmpty || value.length < 7) {
-                        return 'Password must be at least 7 characters long';
-                    }
-                      if(confirmpassword != value){
-                        return 'Password not matched please enter again';
+                  style: TextStyle(color: color1),
+                    cursorColor: Colors.white,
+                    key: ValueKey("UseName"),
+                    validator: (value){
+                      if (value.isEmpty){
+                        return 'Enter your Name';
                       }
+                      return null;
+                    },
+                    controller: _UsernameController,
+                    focusNode: _UsernameFocusNode,
+                  decoration: InputDecoration(
+                    labelStyle: TextStyle(color: Colors.white),
+                    contentPadding: const EdgeInsets.all(8.0),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 2.0,
+                      ),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    labelText: 'UserName',
+                    errorStyle: TextStyle(
+                        color: color1,
+                    ),
+
+                  ),
+                    autocorrect: false,
+                    keyboardType: TextInputType.name,
+                    textInputAction: TextInputAction.next,
+                    onEditingComplete: _UsernameEditingComplete,
+                  ),
+
+              SizedBox(height: 30.0),
+
+
+             TextFormField(
+               style: TextStyle(color:color1),
+               cursorColor: Colors.white,
+                  key: ValueKey("email"),
+                  validator: (value){
+                    if (value.isEmpty || !value.contains('@vitstudent.ac.in')){
+                      return 'Please enter a valid email';
+                    }
                     return null;
                   },
-                  focusNode: _password2FocusNode,
-                  decoration: InputDecoration(
-                    labelText: 'Confirm your Password',
-                  ),
-                  textInputAction: TextInputAction.done,
-                  obscureText: true,
-                  onEditingComplete: _submit,
+                  controller: _emailController,
+                  focusNode: _emailFocusNode,
+               decoration: InputDecoration(
+                 labelStyle: TextStyle(color: Colors.white),
+                 contentPadding: const EdgeInsets.all(8.0),
+                 enabledBorder: OutlineInputBorder(
+                   borderSide: BorderSide(
+                     color: Colors.white,
+                     width: 2.0,
+                   ),
+                   borderRadius: BorderRadius.circular(12.0),
+                 ),
+                 labelText: 'Email ID',
+                 hintText: 'xxxxx@vitstudent.ac.in',
+                 hintStyle: TextStyle(color:Colors.white),
+                 errorStyle: TextStyle(
+                     color: color1
+                 ),
+               ),
+                  autocorrect: false,
+                  keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
+                  onEditingComplete: _emailEditingComplete,
                 ),
 
 
-              SizedBox(height: 8.0),
+              SizedBox(height: 30.0),
+
+              TextFormField(
+                style: TextStyle(color: color1),
+                  cursorColor: Colors.white,
+                  key: ValueKey("password1"),
+                  validator: (value){
+                    confirmpassword =value;
+                    if (value.isEmpty || value.length<7){
+                      return 'Password must be at least 7 characters long';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    labelStyle: TextStyle(color: Colors.white),
+                    contentPadding: const EdgeInsets.all(8.0),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 2.0,
+                      ),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    labelText: 'Password',
+                    errorStyle: TextStyle(
+                        color: color1
+                    ),
+                  ),
+                  controller: _passwordController,
+                  focusNode: _password1FocusNode,
+                  textInputAction: TextInputAction.next,
+                  onEditingComplete: _passwordEditingComplete,
+
+                  obscureText: true,
+                ),
+
+              SizedBox(height: 30.0),
+
+              if(_formType == EmailSignInFormType.register)
+                  TextFormField(
+                    style: TextStyle(color: color1),
+                    key: ValueKey("password2"),
+                    validator: (value){
+                        if (value.isEmpty || value.length < 7) {
+                          return 'Password must be at least 7 characters long';
+                      }
+                        if(confirmpassword != value){
+                          return 'Password not matched please enter again';
+                        }
+                      return null;
+                    },
+                    focusNode: _password2FocusNode,
+                    cursorColor: Colors.white,
+                    decoration: InputDecoration(
+                      labelStyle: TextStyle(color: Colors.white),
+                      contentPadding: const EdgeInsets.all(8.0),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      labelText: 'Confirm your Password',
+                      errorStyle: TextStyle(
+                        color: color1
+                      ),
+                    ),
+                    textInputAction: TextInputAction.done,
+                    obscureText: true,
+                    onEditingComplete: _submit,
+                  ),
+
+
+              SizedBox(height: 50.0),
+
+
               FormSubmitButton(
                 text: primaryText,
+
                 onPressed:(){
                     if (_formkey.currentState.validate() == true) {
                         _submit();
@@ -188,14 +255,16 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
               ),
 
 
-              SizedBox(height: 8.0),
+              SizedBox(height: 5.0),
+
+
               FlatButton(
-                child: Text(secondaryText),
+                child: Text(secondaryText,style: TextStyle(color: Colors.white),),
                 onPressed: _toggleFormType,
               ),
             ],
           ),
-        ),
-      );
+        );
+
     }
 }
