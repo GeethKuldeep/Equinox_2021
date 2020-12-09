@@ -178,7 +178,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                     return null;
                   },
                   decoration: InputDecoration(
-                    labelStyle: TextStyle(color: Colors.white),
+                    labelStyle: TextStyle(color: Colors.white,fontSize: 11),
                     contentPadding: const EdgeInsets.all(8.0),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
