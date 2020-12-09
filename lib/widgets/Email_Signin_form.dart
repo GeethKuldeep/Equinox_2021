@@ -104,7 +104,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                     controller: _UsernameController,
                     focusNode: _UsernameFocusNode,
                   decoration: InputDecoration(
-                    labelStyle: TextStyle(color: Colors.white),
+                    labelStyle: TextStyle(color: Colors.white,fontSize: 11),
                     contentPadding: const EdgeInsets.all(8.0),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
