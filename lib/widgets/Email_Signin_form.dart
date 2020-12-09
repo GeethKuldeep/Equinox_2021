@@ -218,7 +218,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                     focusNode: _password2FocusNode,
                     cursorColor: Colors.white,
                     decoration: InputDecoration(
-                      labelStyle: TextStyle(color: Colors.white),
+                      labelStyle: TextStyle(color: Colors.white,fontSize: 11),
                       contentPadding: const EdgeInsets.all(8.0),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
