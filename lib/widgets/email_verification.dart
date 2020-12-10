@@ -64,7 +64,7 @@ class _VerifiedState extends State<Verified> {
         width: MediaQuery.of(context).size.width*0.23,
         height: MediaQuery.of(context).size.width*0.23,
       ),
-              //SizedBox(height: MediaQuery.of(context).size.width*0.07,),
+              SizedBox(height: MediaQuery.of(context).size.width*0.07,),
       Divider(
         color: color1,
         thickness: 6,
