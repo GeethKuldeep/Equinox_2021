@@ -18,20 +18,19 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
 
 
   var _formkey =GlobalKey<FormState>();
-  String confirmpassword = "";
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _UsernameController = TextEditingController();
   final FocusNode _UsernameFocusNode = FocusNode();
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _password1FocusNode = FocusNode();
-  final FocusNode _password2FocusNode = FocusNode();
   String get _Username => _UsernameController.text;
   String get _email => _emailController.text;
   String get _password => _passwordController.text;
   EmailSignInFormType _formType = EmailSignInFormType.signIn;
   User authResult;
   var color1 = const Color(0xffFBD00D);
+  bool _passwordVisible;
 
 
   void _submit() async {
@@ -54,6 +53,10 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   }
 
 
+  @override
+  void initState() {
+    _passwordVisible = false;
+  }
 
   void _UsernameEditingComplete() {
     FocusScope.of(context).requestFocus(_emailFocusNode);
@@ -61,9 +64,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   void _emailEditingComplete() {
     FocusScope.of(context).requestFocus(_password1FocusNode);
   }
-  void _passwordEditingComplete(){
-    FocusScope.of(context).requestFocus(_password2FocusNode);
-  }
+
 
 
   void _toggleFormType() {
@@ -78,6 +79,8 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
 
     @override
     Widget build(BuildContext context) {
+
+
       final primaryText = _formType == EmailSignInFormType.signIn
           ? 'SIGN IN'
           : 'Create an account';
@@ -104,7 +107,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                     controller: _UsernameController,
                     focusNode: _UsernameFocusNode,
                   decoration: InputDecoration(
-                    labelStyle: TextStyle(color: Colors.white,fontSize: 11),
+                    labelStyle: TextStyle(color: Colors.white,fontSize: 13),
                     contentPadding: const EdgeInsets.all(8.0),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -125,7 +128,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                     onEditingComplete: _UsernameEditingComplete,
                   ),
 
-              SizedBox(height: 30.0),
+              SizedBox(height: MediaQuery.of(context).size.width*0.07,),
 
 
              TextFormField(
@@ -141,7 +144,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                   controller: _emailController,
                   focusNode: _emailFocusNode,
                decoration: InputDecoration(
-                 labelStyle: TextStyle(color: Colors.white,fontSize: 11),
+                 labelStyle: TextStyle(color: Colors.white,fontSize: 13),
                  contentPadding: const EdgeInsets.all(8.0),
                  enabledBorder: OutlineInputBorder(
                    borderSide: BorderSide(
@@ -151,11 +154,10 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                    borderRadius: BorderRadius.circular(12.0),
                  ),
                  labelText: 'Email ID',
-                 hintText: 'xxxxx@vitstudent.ac.in',
-                 hintStyle: TextStyle(color:Colors.white),
                  errorStyle: TextStyle(
-                     color: color1
+                   color: color1,
                  ),
+
                ),
                   autocorrect: false,
                   keyboardType: TextInputType.emailAddress,
@@ -164,82 +166,56 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                 ),
 
 
-              SizedBox(height: 30.0),
+              SizedBox(height: MediaQuery.of(context).size.width*0.07,),
 
               TextFormField(
                 style: TextStyle(color: color1),
                   cursorColor: Colors.white,
                   key: ValueKey("password1"),
                   validator: (value){
-                    confirmpassword =value;
                     if (value.isEmpty || value.length<7){
                       return 'Password must be at least 7 characters long';
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
-                    labelStyle: TextStyle(color: Colors.white,fontSize: 11),
-                    contentPadding: const EdgeInsets.all(8.0),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(12.0),
+                decoration: InputDecoration(
+                  labelStyle: TextStyle(color: Colors.white,fontSize: 13),
+                  contentPadding: const EdgeInsets.all(8.0),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.white,
+                      width: 2.0,
                     ),
-                    labelText: 'Password',
-                    errorStyle: TextStyle(
-                        color: color1
-                    ),
+                    borderRadius: BorderRadius.circular(12.0),
                   ),
+                  labelText: 'Password',
+                  errorStyle: TextStyle(
+                    color: color1,
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      // Based on passwordVisible state choose the icon
+                      _passwordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      // Update the state i.e. toogle the state of passwordVisible variable
+                      setState(() {
+                        _passwordVisible = !_passwordVisible;
+                      });
+                    },
+                  ),
+                ),
                   controller: _passwordController,
                   focusNode: _password1FocusNode,
-                  textInputAction: TextInputAction.next,
-                  onEditingComplete: _passwordEditingComplete,
-
-                  obscureText: true,
+                  textInputAction: TextInputAction.done,
+                  onEditingComplete: _submit,
+                  obscureText: !_passwordVisible,
                 ),
 
-              SizedBox(height: 30.0),
-
-              if(_formType == EmailSignInFormType.register)
-                  TextFormField(
-                    style: TextStyle(color: color1),
-                    key: ValueKey("password2"),
-                    validator: (value){
-                        if (value.isEmpty || value.length < 7) {
-                          return 'Password must be at least 7 characters long';
-                      }
-                        if(confirmpassword != value){
-                          return 'Password not matched please enter again';
-                        }
-                      return null;
-                    },
-                    focusNode: _password2FocusNode,
-                    cursorColor: Colors.white,
-                    decoration: InputDecoration(
-                      labelStyle: TextStyle(color: Colors.white,fontSize: 11),
-                      contentPadding: const EdgeInsets.all(8.0),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      labelText: 'Confirm your Password',
-                      errorStyle: TextStyle(
-                        color: color1
-                      ),
-                    ),
-                    textInputAction: TextInputAction.done,
-                    obscureText: true,
-                    onEditingComplete: _submit,
-                  ),
-
-
-              SizedBox(height: 50.0),
-
+              SizedBox(height: MediaQuery.of(context).size.width*0.07,),
 
               FormSubmitButton(
                 text: primaryText,
@@ -255,7 +231,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
               ),
 
 
-              SizedBox(height: 5.0),
+              SizedBox(height: MediaQuery.of(context).size.width*0.02,),
 
 
               FlatButton(

@@ -11,12 +11,12 @@ class EmailSigninPage extends StatelessWidget {
         resizeToAvoidBottomPadding: false,
         body: Padding(
           padding: EdgeInsets.all(16.0),
-          child: ListView(
+          child: Column(
             children: [
-              SizedBox(height: 20),
+              SizedBox(height: MediaQuery.of(context).size.width*0.1,),
               Image(image: AssetImage('images/Equinox Logo-02 4.png'),
-                width: 350,
-                height: 350,
+                width: MediaQuery.of(context).size.width*0.7,
+                height: MediaQuery.of(context).size.width*0.7,
               ),
               Divider(
                   color: color1,

@@ -12,7 +12,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-
+  var color1 = const Color(0xffFBD00D);
   @override
   Widget build(BuildContext context) {
     const color = const Color(0xff0E1C36);
@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(
           primaryColor: Colors.white,
+          errorColor: color1,
         ),
         debugShowCheckedModeBanner: false,
         title: 'Equinox2021',
