@@ -97,10 +97,10 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                 TextFormField(
                   style: TextStyle(color: color1),
                     cursorColor: Colors.white,
-                    key: ValueKey("UseName"),
+                    key: ValueKey("UserName"),
                     validator: (value){
                       if (value.isEmpty){
-                        return 'Enter your Name';
+                        return '                                               Enter your Name';
                       }
                       return null;
                     },
@@ -109,6 +109,11 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                   decoration: InputDecoration(
                     labelStyle: TextStyle(color: Colors.white,fontSize: 13),
                     contentPadding: const EdgeInsets.all(8.0),
+                    errorBorder: new OutlineInputBorder(
+                      borderSide: new BorderSide(color: Colors.white,
+                        width: 2.0,),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.white,
@@ -144,7 +149,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                   key: ValueKey("email"),
                   validator: (value){
                     if (value.isEmpty || !value.contains('@vitstudent.ac.in')){
-                      return 'Please enter a valid email';
+                      return '                                Please enter a valid email';
                     }
                     return null;
                   },
@@ -153,6 +158,11 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                decoration: InputDecoration(
                  labelStyle: TextStyle(color: Colors.white,fontSize: 13),
                  contentPadding: const EdgeInsets.all(8.0),
+                 errorBorder: new OutlineInputBorder(
+                   borderSide: new BorderSide(color: Colors.white,
+                     width: 2.0,),
+                   borderRadius: BorderRadius.circular(12.0),
+                 ),
                  focusedBorder: OutlineInputBorder(
                    borderSide: BorderSide(
                         color: Colors.white,
@@ -188,11 +198,16 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                   key: ValueKey("password1"),
                   validator: (value){
                     if (value.isEmpty || value.length<7){
-                      return 'Password must be at least 7 characters long';
+                      return '                   Please enter atleast 7 characters';
                     }
                     return null;
                   },
                 decoration: InputDecoration(
+                  errorBorder: new OutlineInputBorder(
+                    borderSide: new BorderSide(color: Colors.white,
+                      width: 2.0,),
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
                   labelStyle: TextStyle(color: Colors.white,fontSize: 13),
                   contentPadding: const EdgeInsets.all(8.0),
                   focusedBorder: OutlineInputBorder(
