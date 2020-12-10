@@ -52,20 +52,31 @@ class _VerifiedState extends State<Verified> {
 
   @override
   Widget build(BuildContext context) {
+    const color = const Color(0xff0E1C36);
+    var color1 = const Color(0xffFBD00D);
     return Scaffold(
-      body: Card(
-        child: Center(
-          child: Column(
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
             children: [
-              SizedBox(height: 50),
-              Center(child: Text('Waiting for your email to be verified ')),
-              SizedBox(height: 15),
-              Center(child: CircularProgressIndicator()),
-
-            ],
-          ),
-        ),
-      )
+        SizedBox(height: MediaQuery.of(context).size.width*0.645,),
+      Image(image: AssetImage('images/Equinox Logo-02 4.png'),
+        width: MediaQuery.of(context).size.width*0.23,
+        height: MediaQuery.of(context).size.width*0.23,
+      ),
+              SizedBox(height: MediaQuery.of(context).size.width*0.07,),
+      Divider(
+        color: color1,
+        thickness: 6,
+      ),
+              SizedBox(height: MediaQuery.of(context).size.width*0.07,),
+              Center(child: Text('Email verification sent',style: TextStyle(fontSize: 28,color: Colors.white,))),
+              SizedBox(height: MediaQuery.of(context).size.width*0.07,),
+              CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(color1),),
+      ]
+    ),
+      ),
+          backgroundColor: color,
     );
   }
   @override

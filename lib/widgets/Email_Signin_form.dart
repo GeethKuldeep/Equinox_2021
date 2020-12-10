@@ -83,10 +83,10 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
 
       final primaryText = _formType == EmailSignInFormType.signIn
           ? 'SIGN IN'
-          : 'Create an account';
+          : 'SIGN UP';
       final secondaryText = _formType == EmailSignInFormType.signIn
-          ? 'Need an account? Register'
-          : 'Have an account? Sign in';
+          ? 'Need an account? \n         Sign up'
+          : 'Have an account? \n         Sign in';
       return Form(
           key: _formkey,
           child: Column(
