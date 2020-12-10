@@ -70,7 +70,7 @@ class _VerifiedState extends State<Verified> {
         thickness: 6,
       ),
               SizedBox(height: MediaQuery.of(context).size.width*0.07,),
-              Center(child: Text('Email verification sent',style: TextStyle(fontSize: 28,color: Colors.white,))),
+              Center(child: Text('Email verification sent',style: TextStyle(fontSize: 28,color: Colors.white))),
               SizedBox(height: MediaQuery.of(context).size.width*0.07,),
               CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(color1),),
       ]

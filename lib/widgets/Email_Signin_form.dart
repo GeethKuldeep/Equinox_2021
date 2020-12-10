@@ -109,6 +109,13 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                   decoration: InputDecoration(
                     labelStyle: TextStyle(color: Colors.white,fontSize: 13),
                     contentPadding: const EdgeInsets.all(8.0),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 2.0,
+                      ),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.white,
@@ -146,6 +153,13 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                decoration: InputDecoration(
                  labelStyle: TextStyle(color: Colors.white,fontSize: 13),
                  contentPadding: const EdgeInsets.all(8.0),
+                 focusedBorder: OutlineInputBorder(
+                   borderSide: BorderSide(
+                        color: Colors.white,
+                         width: 2.0,
+                      ),
+                  borderRadius: BorderRadius.circular(12.0),
+                    ),
                  enabledBorder: OutlineInputBorder(
                    borderSide: BorderSide(
                      color: Colors.white,
@@ -181,6 +195,13 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                 decoration: InputDecoration(
                   labelStyle: TextStyle(color: Colors.white,fontSize: 13),
                   contentPadding: const EdgeInsets.all(8.0),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.white,
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.white,
