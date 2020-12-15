@@ -204,7 +204,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
 
                   ),
                     autocorrect: false,
-                  onChanged: (username) => _updateState(),
+
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next,
                     onEditingComplete: _UsernameEditingComplete,
@@ -255,7 +255,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                ),
                   autocorrect: false,
                   keyboardType: TextInputType.emailAddress,
-               onChanged: (email) => _updateState(),
+
                   textInputAction: TextInputAction.next,
                   onEditingComplete: _emailEditingComplete,
                 ),
@@ -318,24 +318,26 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                   controller: _passwordController,
                   focusNode: _password1FocusNode,
                   textInputAction: TextInputAction.done,
-                onChanged: (password) => _updateState(),
+
                   onEditingComplete: _submit,
                   obscureText: !_passwordVisible,
                 ),
-              Row(
-                children: [
-                  SizedBox(width: MediaQuery.of(context).size.width*0.33,
-                  height: MediaQuery.of(context).size.width*0.01),
-                  FlatButton(
-                    child: Text('Forgot password?',style: GoogleFonts.rambla(color: color1)),
-                    onPressed: (){
-                      forgotpassword();
+
+              if(_formType == EmailSignInFormType.signIn)
+                Row(
+                  children: [
+                    SizedBox(width: MediaQuery.of(context).size.width*0.33,
+                    height: MediaQuery.of(context).size.width*0.01),
+                    FlatButton(
+                      child: Text('Forgot password?',style: GoogleFonts.rambla(color: color1)),
+                      onPressed: (){
+                        forgotpassword();
 
 
-                    },
-                  ),
-                ],
-              ),
+                      },
+                    ),
+                  ],
+                ),
 
               SizedBox(height: MediaQuery.of(context).size.width*0.04,),
 
