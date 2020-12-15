@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sigin/services/authentication.dart';
 import 'package:provider/provider.dart';
 import '../landing_page.dart';
@@ -163,7 +164,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
             children: [
               if(_formType == EmailSignInFormType.register)
                 TextFormField(
-                  style: TextStyle(color: color1),
+                  style: GoogleFonts.rambla(color: color1),
                     cursorColor: Colors.white,
                     key: ValueKey("UserName"),
                     validator: (value){
@@ -213,7 +214,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
 
 
              TextFormField(
-               style: TextStyle(color:color1),
+               style: GoogleFonts.rambla(color: color1),
                cursorColor: Colors.white,
                   key: ValueKey("email"),
                   validator: (value){
@@ -263,7 +264,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
               SizedBox(height: MediaQuery.of(context).size.width*0.07,),
 
               TextFormField(
-                style: TextStyle(color: color1),
+                style: GoogleFonts.rambla(color: color1),
                   cursorColor: Colors.white,
                   key: ValueKey("password1"),
                   validator: (value){
@@ -321,8 +322,22 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                   onEditingComplete: _submit,
                   obscureText: !_passwordVisible,
                 ),
+              Row(
+                children: [
+                  SizedBox(width: MediaQuery.of(context).size.width*0.33,
+                  height: MediaQuery.of(context).size.width*0.01),
+                  FlatButton(
+                    child: Text('Forgot password?',style: GoogleFonts.rambla(color: color1)),
+                    onPressed: (){
+                      forgotpassword();
 
-              SizedBox(height: MediaQuery.of(context).size.width*0.07,),
+
+                    },
+                  ),
+                ],
+              ),
+
+              SizedBox(height: MediaQuery.of(context).size.width*0.04,),
 
               FormSubmitButton(
                 text: primaryText,
@@ -348,18 +363,11 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
 
 
               FlatButton(
-                child: Text(secondaryText,style: TextStyle(color: Colors.white),),
+                child: Text(secondaryText,style: GoogleFonts.rambla(color: Colors.white),),
                 onPressed: _toggleFormType,
               ),
               SizedBox(height: MediaQuery.of(context).size.width*0.01,),
-              FlatButton(
-                child: Text('Forgot password?',style: TextStyle(color: Colors.white),),
-                onPressed: (){
-                    forgotpassword();
 
-
-                },
-              ),
             ],
           ),
         );
