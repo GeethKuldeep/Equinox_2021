@@ -109,6 +109,22 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   void _updateState() {
     setState(() {});
   }
+  void forgotpassword()async{
+    try {
+      final auth = Provider.of<AuthBase>(context);
+      await auth.resetPassword(_email);
+    }catch(e){
+      if(e is PlatformException) {
+        if (e.code == 'error') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text('Enter your email'),
+            ),
+          );
+        }
+      }
+    }
+  }
 
 
 
@@ -326,6 +342,18 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
               FlatButton(
                 child: Text(secondaryText,style: TextStyle(color: Colors.white),),
                 onPressed: _toggleFormType,
+              ),
+              SizedBox(height: MediaQuery.of(context).size.width*0.01,),
+              FlatButton(
+                child: Text('Forgot password?',style: TextStyle(color: Colors.white),),
+                onPressed: (){
+                    forgotpassword();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: const Text('Reset email has been sent'),
+                      ),
+                    );
+                },
               ),
             ],
           ),
