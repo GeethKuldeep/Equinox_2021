@@ -27,10 +27,11 @@ class _LandingPageState extends State<LandingPage> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
             User user = snapshot.data;
-            if (user == null) {
-              return EmailSigninPage();
+            if (user != null) {
+              print('HomePage called 2');
+              return HomePage();
             }
-            return HomePage();
+            return EmailSigninPage();
           }
           else {
             return Scaffold(

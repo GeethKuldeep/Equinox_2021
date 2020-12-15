@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sigin/services/authentication.dart';
 import 'package:provider/provider.dart';
+import '../landing_page.dart';
 import 'Email_Signin_Button.dart';
 import 'email_verification.dart';
 
@@ -38,6 +39,8 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
       final auth = Provider.of<AuthBase>(context);
       if (_formType == EmailSignInFormType.signIn) {
         authResult = await auth.signInWithEmailAndPassword(_email, _password);
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> LandingPage()));
+        print('HomePage called 1');
       } else {
         authResult = await auth.createUserWithEmailAndPassword(_email, _password);
         await Firestore.instance.collection('users').document(authResult.uid).setData({
@@ -64,6 +67,9 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   void _emailEditingComplete() {
     FocusScope.of(context).requestFocus(_password1FocusNode);
   }
+  void _updateState() {
+    setState(() {});
+  }
 
 
 
@@ -79,7 +85,6 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
 
     @override
     Widget build(BuildContext context) {
-
 
       final primaryText = _formType == EmailSignInFormType.signIn
           ? 'SIGN IN'
@@ -259,7 +264,8 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                 onPressed:(){
                     if (_formkey.currentState.validate() == true) {
                         _submit();
-                      if (_formType == EmailSignInFormType.register) {
+
+                        if (_formType == EmailSignInFormType.register) {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Verified()));
                       }
                     }
