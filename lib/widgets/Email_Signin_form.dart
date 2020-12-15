@@ -35,6 +35,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   bool _passwordVisible;
   final snackBar = SnackBar(content: Text('Email is already registered'));
   String hello;
+  int please;
 
 // Find the Scaffold in the widget tree and use it to show a SnackBar.
 
@@ -113,9 +114,15 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
     try {
       final auth = Provider.of<AuthBase>(context);
       await auth.resetPassword(_email);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Reset email has been sent'),
+        ),
+      );
     }catch(e){
+      print(e);
       if(e is PlatformException) {
-        if (e.code == 'error') {
+        if (e != null) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: const Text('Enter your email'),
@@ -123,6 +130,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
           );
         }
       }
+
     }
   }
 
@@ -348,11 +356,8 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                 child: Text('Forgot password?',style: TextStyle(color: Colors.white),),
                 onPressed: (){
                     forgotpassword();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: const Text('Reset email has been sent'),
-                      ),
-                    );
+
+
                 },
               ),
             ],
