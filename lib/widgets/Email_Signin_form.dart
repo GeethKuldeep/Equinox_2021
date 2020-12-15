@@ -1,6 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sigin/services/authentication.dart';
 import 'package:provider/provider.dart';
 import '../landing_page.dart';
@@ -32,6 +33,11 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   User authResult;
   var color1 = const Color(0xffFBD00D);
   bool _passwordVisible;
+  final snackBar = SnackBar(content: Text('Email is already registered'));
+  String hello;
+
+// Find the Scaffold in the widget tree and use it to show a SnackBar.
+
 
 
   void _submit() async {
@@ -52,6 +58,39 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
       //Navigator.of(context).pop();
     } catch (e) {
       print(e.toString());
+      if(e is PlatformException) {
+        if(e.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
+          hello =e.code;
+          print(hello);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text('This Email is already registered'),
+            ),
+          );
+        }
+        if(e.code == 'ERROR_WRONG_PASSWORD') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text('Wrong password'),
+            ),
+          );
+        }
+        if(e.code == 'ERROR_WRONG_PASSWORD') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text('Wrong password!!!'),
+            ),
+          );
+        }
+        if(e.code == 'ERROR_USER_NOT_FOUND') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text('No user found!!!'),
+            ),
+          );
+        }
+
+      }
     }
   }
 
@@ -140,6 +179,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
 
                   ),
                     autocorrect: false,
+                  onChanged: (username) => _updateState(),
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next,
                     onEditingComplete: _UsernameEditingComplete,
@@ -190,6 +230,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                ),
                   autocorrect: false,
                   keyboardType: TextInputType.emailAddress,
+               onChanged: (email) => _updateState(),
                   textInputAction: TextInputAction.next,
                   onEditingComplete: _emailEditingComplete,
                 ),
@@ -252,6 +293,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                   controller: _passwordController,
                   focusNode: _password1FocusNode,
                   textInputAction: TextInputAction.done,
+                onChanged: (password) => _updateState(),
                   onEditingComplete: _submit,
                   obscureText: !_passwordVisible,
                 ),
@@ -263,13 +305,18 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
 
                 onPressed:(){
                     if (_formkey.currentState.validate() == true) {
-                        _submit();
-
+                      _submit();
+                      print(hello);
+                      if (hello != null) {
                         if (_formType == EmailSignInFormType.register) {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Verified()));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => Verified()));
+                          hello=null;
+                        }
                       }
                     }
-                },
+                    }
+
               ),
 
 
