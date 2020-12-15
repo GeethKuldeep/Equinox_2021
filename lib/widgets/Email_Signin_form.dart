@@ -66,7 +66,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
           print(hello);
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: const Text('This Email is already registered'),
+              content: const Text('This Email is already registered \n Please go back '),
             ),
           );
         }
@@ -345,15 +345,12 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                 onPressed:(){
                     if (_formkey.currentState.validate() == true) {
                       _submit();
-                      print(hello);
-                      if (hello != null) {
                         if (_formType == EmailSignInFormType.register) {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => Verified()));
-                          hello=null;
+
                         }
                       }
-                    }
                     }
 
               ),
